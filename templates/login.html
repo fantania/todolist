@@ -1,0 +1,35 @@
+{% include 'base.html' %}
+
+{% block content %}
+<div class="container pt-5 bg-body-teriary">   
+<main class="form-signin w-100 m-auto">
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  
+      <div class="form-floating form-control">
+        <h6>Email address</h6>
+        {{ form.email }}
+    </div>
+
+   <div class="form-floating form-control">
+        <h6>Password</h6>
+        {{ form.password }}
+    </div>
+    <ul class="errorList">
+    {% for field in form %}
+        {% if field.errors%}
+            {% for error in field.errors%}
+                <li class="text-danger" style="list-style-type: none;">{{ error }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    <li class="text-danger">{{ form.non_field_errors }}</li>
+</ul>
+
+      <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+      
+    </form>
+  </main>
+</div>
+ {% endblock %}

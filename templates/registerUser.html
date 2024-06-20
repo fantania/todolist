@@ -1,0 +1,60 @@
+{% include 'base.html' %}
+
+{% block content %}
+<div class="container pt-5 bg-body-teriary">   
+<main class="form-signin w-100 m-auto">
+    <form method="post" action="{% url 'registerUser' %}">
+        {% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
+
+      
+        <div class="form-floating form-control">
+            <h6>First Name</h6>
+            {{ form.first_name }}
+        </div>
+    
+        <div class="form-floating form-control">
+            <h6>Last Name</h6>
+            {{ form.last_name }}
+        </div>
+     
+  
+        <div class="form-floating form-control">
+            <h6>Email address</h6>
+            {{ form.email }}
+        </div>
+
+        <div class="form-floating form-control">
+            <h6>User Name</h6>
+            {{ form.username }}
+        </div>
+
+       <div class="form-floating form-control">
+            <h6>Password</h6>
+            {{ form.password }}
+        </div>
+
+        <div class="form-floating form-control">
+            <h6>Confirm Password</h6>
+            {{ form.confirm_password }}
+        </div>
+        <ul class="errorList">
+            {% for field in form %}
+                {% if field.errors%}
+                    {% for error in field.errors%}
+                        <li class="text-danger" style="list-style-type: none;">{{ error }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            <li class="text-danger">{{ form.non_field_errors }}</li>
+        </ul>
+      <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            {% include 'alerts.html' %}
+        </div>
+    </div>
+    </form>
+  </main>
+</div>
+ {% endblock %}
